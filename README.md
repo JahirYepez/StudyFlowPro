@@ -27,4 +27,3 @@ logging, seguridad basica, documentacion y despliegue.
 
 Fase actual: definicion de arquitectura, alcance funcional y entregables de
 calidad antes de iniciar la implementacion.
-

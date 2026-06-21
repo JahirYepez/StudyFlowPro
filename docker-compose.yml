@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: studyflow_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: studyflow_user
+      POSTGRES_PASSWORD: studyflow_password
+      POSTGRES_DB: studyflow_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - studyflow_postgres_data:/var/lib/postgresql/data
+
+  mongodb:
+    image: mongo:7
+    container_name: studyflow_mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: studyflow_mongo
+      MONGO_INITDB_ROOT_PASSWORD: studyflow_password
+    ports:
+      - "27017:27017"
+    volumes:
+      - studyflow_mongodb_data:/data/db
+
+volumes:
+  studyflow_postgres_data:
+  studyflow_mongodb_data:

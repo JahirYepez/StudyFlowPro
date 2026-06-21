@@ -1,8 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import text
 
 from app.core.config import settings
 from app.database.mongodb import mongo_db
+from app.database.postgresql import engine
 
 
 app = FastAPI(
@@ -28,6 +30,16 @@ def health_check():
         "environment": settings.environment,
     }
 
+@app.get("/health/postgres", tags=["Health"])
+def postgres_health_check():
+    with engine.connect() as connection:
+        result = connection.execute(text("SELECT 1")).scalar()
+
+    return {
+        "status": "ok",
+        "database": "postgresql",
+        "result": result,
+    }
 
 @app.get("/health/mongo", tags=["Health"])
 def mongo_health_check():

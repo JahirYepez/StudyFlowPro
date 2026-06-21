@@ -4,7 +4,9 @@ from sqlalchemy import text
 
 from app.core.config import settings
 from app.database.mongodb import mongo_db
-from app.database.postgresql import engine
+from app.database.postgresql import Base, engine
+from app.models.user import User
+from app.routes.auth import router as auth_router
 
 
 app = FastAPI(
@@ -12,6 +14,10 @@ app = FastAPI(
     version="0.1.0",
     description="API academica para StudyFlow.",
 )
+
+Base.metadata.create_all(bind=engine)
+
+app.include_router(auth_router)
 
 app.add_middleware(
     CORSMiddleware,

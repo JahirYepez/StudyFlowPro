@@ -73,6 +73,7 @@ export type StudyGoal = {
   id: number
   title: string
   target_minutes: number
+  progress_percentage: number
   deadline: string | null
   user_id: number
   subject_id: number

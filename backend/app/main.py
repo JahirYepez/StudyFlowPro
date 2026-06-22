@@ -5,7 +5,7 @@ from sqlalchemy import text
 from app.core.config import settings
 from app.core.logging import CorrelationIdMiddleware, configure_logging
 from app.database.mongodb import mongo_db
-from app.database.postgresql import Base, engine
+from app.database.postgresql import Base, apply_schema_updates, engine
 from app.models.reminder import Reminder
 from app.models.study_goal import StudyGoal
 from app.models.subject import Subject
@@ -34,6 +34,7 @@ app = FastAPI(
 )
 
 Base.metadata.create_all(bind=engine)
+apply_schema_updates()
 
 app.add_middleware(CorrelationIdMiddleware)
 

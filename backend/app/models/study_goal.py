@@ -10,6 +10,7 @@ class StudyGoal(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String(140), nullable=False)
     target_minutes = Column(Integer, nullable=False)
+    progress_percentage = Column(Integer, nullable=False, default=0)
     deadline = Column(Date, nullable=True)
 
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)

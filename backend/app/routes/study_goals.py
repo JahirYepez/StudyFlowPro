@@ -135,6 +135,9 @@ def update_study_goal(
     if goal_in.target_minutes is not None:
         goal.target_minutes = goal_in.target_minutes
 
+    if goal_in.progress_percentage is not None:
+        goal.progress_percentage = goal_in.progress_percentage
+
     if "deadline" in goal_in.model_fields_set:
         goal.deadline = goal_in.deadline
 

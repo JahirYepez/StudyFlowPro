@@ -95,8 +95,8 @@ def get_dashboard_summary(db: Session, current_user: User) -> dict:
     )
 
     goal_progress_percentage = (
-        min(round((total_study_minutes / total_goal_minutes) * 100), 100)
-        if total_goal_minutes > 0
+        round(sum(goal.progress_percentage for goal in study_goals) / total_study_goals)
+        if total_study_goals > 0
         else 0
     )
 

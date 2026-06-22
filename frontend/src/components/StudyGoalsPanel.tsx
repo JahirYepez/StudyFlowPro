@@ -1,6 +1,6 @@
 import { Edit2, Trash2, X } from 'lucide-react'
 import type { FormEvent } from 'react'
-import type { StudyGoal, StudySession, Subject } from '../types/api'
+import type { StudyGoal, Subject } from '../types/api'
 
 type StudyGoalForm = {
   title: string
@@ -13,7 +13,6 @@ type StudyGoalsPanelProps = {
   goals: StudyGoal[]
   totalGoals: number
   subjects: Subject[]
-  sessions: StudySession[]
   saving: boolean
   goalForm: StudyGoalForm
   editingGoalId: number | null
@@ -27,6 +26,7 @@ type StudyGoalsPanelProps = {
   onCancelEditGoal: () => void
   onUpdateGoal: (event: FormEvent<HTMLFormElement>) => void
   onDeleteGoal: (goalId: number) => void
+  onUpdateGoalProgress: (goal: StudyGoal, nextProgress: number) => void
 }
 
 type DatePart = 'day' | 'month' | 'year'
@@ -105,12 +105,6 @@ function getReadableTextColor(backgroundColor: string) {
   return brightness > 150 ? '#111111' : '#ffffff'
 }
 
-function getStudiedMinutesBySubject(sessions: StudySession[], subjectId: number) {
-  return sessions
-    .filter((session) => session.subject_id === subjectId)
-    .reduce((total, session) => total + session.duration_minutes, 0)
-}
-
 type DeadlineSelectsProps = {
   value: string
   onChange: (value: string) => void
@@ -168,7 +162,6 @@ export function StudyGoalsPanel({
   goals,
   totalGoals,
   subjects,
-  sessions,
   saving,
   goalForm,
   editingGoalId,
@@ -182,6 +175,7 @@ export function StudyGoalsPanel({
   onCancelEditGoal,
   onUpdateGoal,
   onDeleteGoal,
+  onUpdateGoalProgress,
 }: StudyGoalsPanelProps) {
   return (
     <section className="goals-view">
@@ -264,8 +258,7 @@ export function StudyGoalsPanel({
             const isEditing = editingGoalId === goal.id
             const subjectName = getSubjectName(subjects, goal.subject_id)
             const subjectColor = getSubjectColor(subjects, goal.subject_id)
-            const studiedMinutes = getStudiedMinutesBySubject(sessions, goal.subject_id)
-            const progress = Math.min(Math.round((studiedMinutes / goal.target_minutes) * 100), 100)
+            const progress = goal.progress_percentage
 
             return (
               <article className="list-row editable-row" key={goal.id}>
@@ -351,14 +344,30 @@ export function StudyGoalsPanel({
                         </span>
                       </div>
 
-                      <small>
-                        {studiedMinutes} / {goal.target_minutes} min - {formatDate(goal.deadline)}
-                      </small>
+                      <small>{goal.target_minutes} min objetivo - {formatDate(goal.deadline)}</small>
 
                       <div className="goal-progress" aria-label={`Progreso ${progress}%`}>
                         <span style={{ width: `${progress}%` }} />
                       </div>
-                      <p className="row-description">{progress}% completado</p>
+                      <div className="goal-progress-controls">
+                        <button
+                          className="small-action"
+                          type="button"
+                          disabled={saving || progress <= 0}
+                          onClick={() => onUpdateGoalProgress(goal, progress - 5)}
+                        >
+                          -5%
+                        </button>
+                        <p className="row-description">{progress}% completado</p>
+                        <button
+                          className="small-action"
+                          type="button"
+                          disabled={saving || progress >= 100}
+                          onClick={() => onUpdateGoalProgress(goal, progress + 5)}
+                        >
+                          +5%
+                        </button>
+                      </div>
                     </div>
 
                     <div className="row-actions">

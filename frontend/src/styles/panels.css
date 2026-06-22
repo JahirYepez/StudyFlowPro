@@ -101,6 +101,18 @@
   border-radius: inherit;
 }
 
+.goal-progress-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.goal-progress-controls .row-description {
+  margin: 0;
+}
+
 .task-row {
   justify-content: space-between;
 }

@@ -171,7 +171,6 @@ function App() {
             goals={app.filteredStudyGoals}
             totalGoals={app.studyGoals.length}
             subjects={app.subjects}
-            sessions={app.studySessions}
             saving={app.saving}
             goalForm={app.goalForm}
             editingGoalId={app.editingGoalId}
@@ -185,6 +184,7 @@ function App() {
             onCancelEditGoal={app.handleCancelEditGoal}
             onUpdateGoal={app.handleUpdateGoal}
             onDeleteGoal={app.handleDeleteGoal}
+            onUpdateGoalProgress={app.handleUpdateGoalProgress}
           />
         )}
 

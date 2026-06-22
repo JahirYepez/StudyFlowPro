@@ -13,6 +13,7 @@ class StudyGoalCreate(BaseModel):
 class StudyGoalUpdate(BaseModel):
     title: str | None = Field(default=None, min_length=3, max_length=140)
     target_minutes: int | None = Field(default=None, gt=0, le=60000)
+    progress_percentage: int | None = Field(default=None, ge=0, le=100)
     deadline: date | None = None
     subject_id: int | None = None
 
@@ -21,6 +22,7 @@ class StudyGoalResponse(BaseModel):
     id: int
     title: str
     target_minutes: int
+    progress_percentage: int
     deadline: date | None
     user_id: int
     subject_id: int

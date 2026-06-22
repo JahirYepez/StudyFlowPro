@@ -123,11 +123,37 @@ export function useStudyGoalActions({
     }
   }
 
+  async function handleUpdateGoalProgress(goal: StudyGoal, nextProgress: number) {
+    if (!token) return
+
+    const progressPercentage = Math.min(Math.max(nextProgress, 0), 100)
+
+    setSaving(true)
+    setError('')
+
+    try {
+      await apiRequest<StudyGoal>(`/study-goals/${goal.id}`, {
+        method: 'PATCH',
+        token,
+        body: {
+          progress_percentage: progressPercentage,
+        },
+      })
+
+      await loadAppData(token)
+    } catch (requestError) {
+      setError(requestError instanceof Error ? requestError.message : 'No se pudo actualizar el progreso.')
+    } finally {
+      setSaving(false)
+    }
+  }
+
   return {
     handleCreateGoal,
     handleStartEditGoal,
     handleCancelEditGoal,
     handleUpdateGoal,
     handleDeleteGoal,
+    handleUpdateGoalProgress,
   }
 }

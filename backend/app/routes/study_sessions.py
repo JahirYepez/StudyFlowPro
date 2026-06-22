@@ -160,7 +160,7 @@ def update_study_session(
     if session_in.session_date is not None:
         update_data["session_date"] = session_in.session_date.isoformat()
 
-    if session_in.notes is not None:
+    if "notes" in session_in.model_fields_set:
         update_data["notes"] = session_in.notes
 
     if update_data:

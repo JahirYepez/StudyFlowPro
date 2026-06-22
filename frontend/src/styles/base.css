@@ -1,0 +1,97 @@
+/* Base elements and buttons */
+
+.form-stack,
+.task-form {
+  display: grid;
+  gap: 14px;
+}
+
+.form-stack label {
+  display: grid;
+  gap: 7px;
+  color: var(--brand-main);
+  font-weight: 750;
+  font-size: 14px;
+}
+
+.password-help {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  padding: 12px 14px;
+  color: var(--text-main);
+  background: #ffffff;
+  font: inherit;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 4px solid var(--surface-soft);
+  border-color: var(--brand-mid);
+}
+
+.primary-button,
+.ghost-button,
+.theme-button,
+.auth-theme-button,
+.sidebar-nav-button,
+.logout-button,
+.inline-form button,
+.task-row button,
+.icon-action {
+  border: 0;
+  border-radius: 999px;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.primary-button {
+  padding: 13px 17px;
+  color: #ffffff;
+  background: var(--brand-main);
+}
+
+.primary-button:hover,
+.inline-form button:hover,
+.task-row button:hover,
+.theme-button:hover,
+.auth-theme-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.error-message {
+  margin: 0;
+  padding: 12px 14px;
+  color: var(--brand-main);
+  background: var(--panel-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+}
+
+.error-message.wide {
+  margin-bottom: 18px;
+}

@@ -21,6 +21,7 @@ class TaskUpdate(BaseModel):
     description: str | None = Field(default=None, max_length=800)
     due_date: date | None = None
     priority: TaskPriority | None = None
+    completed: bool | None = None
     subject_id: int | None = None
     category_id: int | None = None
 

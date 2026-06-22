@@ -1,0 +1,41 @@
+/* Theme variables */
+
+:root {
+  --blush-100: #f3ccde;
+  --mauve-200: #d6a8c4;
+  --mauve-300: #ba88ae;
+  --plum-400: #9e6899;
+  --plum-900: #5b3765;
+}
+
+.app-shell,
+.auth-page {
+  --page-bg: #f5f5f5;
+  --panel-bg: #ffffff;
+  --panel-soft: #ededed;
+  --surface-soft: rgba(0, 0, 0, 0.055);
+  --text-main: #181818;
+  --text-muted: #666666;
+  --brand-main: #111111;
+  --brand-mid: #3f3f3f;
+  --brand-soft: #d8d8d8;
+  --border-soft: rgba(0, 0, 0, 0.13);
+  --shadow-soft: 0 22px 55px rgba(0, 0, 0, 0.12);
+  --shadow-small: 0 16px 34px rgba(0, 0, 0, 0.12);
+}
+
+.app-shell[data-theme='palette'],
+.auth-page[data-theme='palette'] {
+  --page-bg: #f8edf4;
+  --panel-bg: #fff9fc;
+  --panel-soft: #f3ccde;
+  --surface-soft: rgba(243, 204, 222, 0.28);
+  --text-main: #4b2d53;
+  --text-muted: #846287;
+  --brand-main: #5b3765;
+  --brand-mid: #9e6899;
+  --brand-soft: #d6a8c4;
+  --border-soft: rgba(91, 55, 101, 0.12);
+  --shadow-soft: 0 22px 55px rgba(91, 55, 101, 0.13);
+  --shadow-small: 0 16px 34px rgba(91, 55, 101, 0.13);
+}

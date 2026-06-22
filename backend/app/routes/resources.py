@@ -161,7 +161,7 @@ def update_resource(
     if resource_in.resource_type is not None:
         update_data["resource_type"] = resource_in.resource_type
 
-    if resource_in.notes is not None:
+    if "notes" in resource_in.model_fields_set:
         update_data["notes"] = resource_in.notes
 
     if update_data:

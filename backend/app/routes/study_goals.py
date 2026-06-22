@@ -135,7 +135,7 @@ def update_study_goal(
     if goal_in.target_minutes is not None:
         goal.target_minutes = goal_in.target_minutes
 
-    if goal_in.deadline is not None:
+    if "deadline" in goal_in.model_fields_set:
         goal.deadline = goal_in.deadline
 
     db.commit()

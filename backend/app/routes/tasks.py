@@ -184,6 +184,9 @@ def update_task(
     if task_in.priority is not None:
         task.priority = task_in.priority
 
+    if task_in.completed is not None:
+        task.completed = task_in.completed
+
     db.commit()
     db.refresh(task)
 

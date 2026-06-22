@@ -1,0 +1,128 @@
+/* Responsive rules */
+
+@media (max-width: 1260px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+    grid-template-areas:
+      'subjects subjects'
+      'pending completed'
+      'taskprogress minutes'
+      'goals goals';
+  }
+}
+
+@media (max-width: 980px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    min-height: auto;
+  }
+
+  .metrics-grid,
+  .content-grid,
+  .content-grid.single-view,
+  .dashboard-task-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metrics-grid {
+    grid-template-areas:
+      'subjects'
+      'pending'
+      'completed'
+      'taskprogress'
+      'minutes'
+      'goals';
+  }
+
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .task-form,
+  .task-form-wide,
+  .task-meta-selects,
+  .date-selects,
+  .session-form,
+  .session-date-selects,
+  .goal-form,
+  .goal-meta-selects,
+  .goal-date-selects,
+  .resource-form,
+  .resource-meta-selects {
+    grid-template-columns: 1fr;
+  }
+
+  .task-form-wide .task-title-input,
+  .task-meta-selects,
+  .task-form-wide .date-selects {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 620px) {
+  .workspace,
+  .auth-page {
+    padding: 18px;
+  }
+
+  .auth-panel,
+  .panel {
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .auth-theme-button {
+    top: 14px;
+    right: 14px;
+  }
+
+  .metrics-grid {
+    gap: 12px;
+  }
+
+  .inline-form {
+    grid-template-columns: 1fr 48px;
+  }
+
+  .inline-form button {
+    grid-column: 1 / -1;
+    min-height: 44px;
+  }
+
+  .task-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 620px) {
+  .subject-form,
+  .edit-subject-form,
+  .session-edit-form,
+  .goal-edit-form,
+  .resource-edit-form {
+    grid-template-columns: 1fr;
+  }
+
+  .color-swatches {
+    grid-template-columns: repeat(4, 30px);
+  }
+
+  .filter-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-selects {
+    grid-template-columns: 1fr;
+  }
+
+  .status-filter {
+    width: 100%;
+    justify-content: center;
+  }
+}

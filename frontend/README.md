@@ -1,73 +1,84 @@
-# React + TypeScript + Vite
+# Frontend - StudyFlowPro
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este frontend es la interfaz web de StudyFlowPro. Esta hecho con React,
+TypeScript y Vite.
 
-Currently, two official plugins are available:
+## Estructura
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```text
+frontend/
+  src/
+    api/
+    assets/
+    components/
+    config/
+    hooks/
+    styles/
+    types/
+    utils/
+  cypress/
+    e2e/
+    fixtures/
+    support/
+  package.json
+  cypress.config.cjs
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Carpetas principales
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- `src/api`: funciones para comunicarse con el backend.
+- `src/assets`: imagenes y recursos visuales.
+- `src/components`: pantallas y paneles de la aplicacion.
+- `src/config`: valores iniciales y configuracion de vistas.
+- `src/hooks`: logica de estado y acciones del frontend.
+- `src/styles`: archivos CSS separados por secciones.
+- `src/types`: tipos TypeScript usados en la app.
+- `src/utils`: utilidades pequenas, como almacenamiento local.
+- `cypress/e2e`: pruebas de flujo completo sobre la app desplegada.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Ejecutar localmente
+
+```bash
+npm install
+npm run dev
+```
+
+URL local:
+
+```text
+http://localhost:5173
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+## Cypress
+
+Ejecutar pruebas en consola:
+
+```bash
+npm run cypress:run
+```
+
+Abrir interfaz de Cypress:
+
+```bash
+npm run cypress:open
+```
+
+## Variable principal
+
+El frontend usa:
+
+```env
+VITE_API_URL=https://studyflowpro-api.onrender.com
+```
+
+En local puede apuntar a:
+
+```env
+VITE_API_URL=http://127.0.0.1:8000
 ```

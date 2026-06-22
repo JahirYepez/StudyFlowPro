@@ -8,6 +8,7 @@ from app.models.task import Task
 from app.models.user import User
 from app.models.study_goal import StudyGoal
 from app.models.reminder import Reminder
+from app.services.study_metrics import calculate_goal_progress_average, calculate_task_progress, sum_study_minutes
 
 def get_dashboard_summary(db: Session, current_user: User) -> dict:
     today = date.today()
@@ -64,10 +65,9 @@ def get_dashboard_summary(db: Session, current_user: User) -> dict:
         .count()
     )
 
-    progress_percentage = (
-        round((completed_tasks / total_tasks) * 100)
-        if total_tasks > 0
-        else 0
+    progress_percentage = calculate_task_progress(
+        completed_tasks=completed_tasks,
+        total_tasks=total_tasks,
     )
 
     study_sessions = list(
@@ -76,10 +76,7 @@ def get_dashboard_summary(db: Session, current_user: User) -> dict:
 
     total_study_sessions = len(study_sessions)
 
-    total_study_minutes = sum(
-        session["duration_minutes"]
-        for session in study_sessions
-    )
+    total_study_minutes = sum_study_minutes(study_sessions)
 
     study_goals = (
         db.query(StudyGoal)
@@ -94,11 +91,10 @@ def get_dashboard_summary(db: Session, current_user: User) -> dict:
         for goal in study_goals
     )
 
-    goal_progress_percentage = (
-        round(sum(goal.progress_percentage for goal in study_goals) / total_study_goals)
-        if total_study_goals > 0
-        else 0
-    )
+    goal_progress_percentage = calculate_goal_progress_average([
+        goal.progress_percentage
+        for goal in study_goals
+    ])
 
     now = datetime.now(timezone.utc)
 
